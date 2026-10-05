@@ -40,22 +40,26 @@ int main(void)
 
     
     //malloc(n_byte)
+    //Non vengono inizializzate le celle
     printf("\nArray dinamico con malloc di %d elementi\n", n_elementi);
-    p = (int*) malloc(sizeof(int) * n_elementi);
+    p = (int*) malloc(sizeof(int) * n_elementi); //In p viene salvato il primo indirizzo della prima cella del vettore
     Stampa_Vettore(p, n_elementi);
     free(p); //libero l'area di memoria quando non mi serve più
 
     
     //calloc(n_celle per tipo, n_byte per singolo tipo)
+    //Le celle vengono inizializzate a 0
     printf("\nArray dinamico con calloc di %d elementi\n", n_elementi);
     p = (int*) calloc(n_elementi, sizeof(int));
     Stampa_Vettore(p, n_elementi);
 
     //ralloc(indirizzo prima cella, nuova dimensione)
+    //Array Resize
     int nuova_dim = 15;
     printf("\nArray dinamico con realloc di %d elementi\n", nuova_dim);
-    p = realloc(p, nuova_dim * sizeof(int));
+    p = realloc(p, nuova_dim * sizeof(int)); //Da un indirizzo perché non è detto che il puntatore rimani lo stesso
     Stampa_Vettore(p, nuova_dim);
+    free(p); //libero l'area di memoria quando non mi serve più
 
     return 0;
 }
