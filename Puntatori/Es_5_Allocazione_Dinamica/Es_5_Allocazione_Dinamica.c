@@ -19,7 +19,7 @@ Memoria dinamica: Heap
 
 //è importante fare la free(), per fare in modo che il computer possa utilizzarla dopo che non ci serve più
 
-void Stampa_Vettore(int a[], int dim);
+void Stampa_Vettore_Int(int a[], int dim);
 
 int main(void) 
 {
@@ -32,7 +32,7 @@ int main(void)
     //dim = dim_a
 
     printf("Array statico di %d elementi\n", dim_a);
-    Stampa_Vettore(v, dim_a);
+    Stampa_Vettore_Int(v, dim_a);
 
     //Allocazione dinamica
     int n_elementi = 10;
@@ -43,7 +43,7 @@ int main(void)
     //Non vengono inizializzate le celle
     printf("\nArray dinamico con malloc di %d elementi\n", n_elementi);
     p = (int*) malloc(sizeof(int) * n_elementi); //In p viene salvato il primo indirizzo della prima cella del vettore
-    Stampa_Vettore(p, n_elementi);
+    Stampa_Vettore_Int(p, n_elementi);
     free(p); //libero l'area di memoria quando non mi serve più
 
     
@@ -51,20 +51,20 @@ int main(void)
     //Le celle vengono inizializzate a 0
     printf("\nArray dinamico con calloc di %d elementi\n", n_elementi);
     p = (int*) calloc(n_elementi, sizeof(int));
-    Stampa_Vettore(p, n_elementi);
+    Stampa_Vettore_Int(p, n_elementi);
 
     //ralloc(indirizzo prima cella, nuova dimensione)
     //Array Resize
     int nuova_dim = 15;
     printf("\nArray dinamico con realloc di %d elementi\n", nuova_dim);
     p = realloc(p, nuova_dim * sizeof(int)); //Da un indirizzo perché non è detto che il puntatore rimani lo stesso
-    Stampa_Vettore(p, nuova_dim);
+    Stampa_Vettore_Int(p, nuova_dim);
     free(p); //libero l'area di memoria quando non mi serve più
 
     return 0;
 }
 
-void Stampa_Vettore(int a[], int dim) {
+void Stampa_Vettore_Int(int a[], int dim) {
     int i;
     for (i = 0; i < dim; i++) {
         printf("v[%d]: %d - %p\n", i, a[i], &a[i]);

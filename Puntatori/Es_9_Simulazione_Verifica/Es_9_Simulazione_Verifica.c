@@ -10,9 +10,13 @@ void Es_1();
 void Es_2();
 void Es_3();
 
-void Carica_Vettore(int* v, int* lunghezza, int min, int max);
-void Stampa_Vettore(int* v, int* lunghezza);
+void Carica_Vettore_Int(int* v, int* lunghezza, int min, int max);
+void Stampa_Vettore_Int(int* v, int* lunghezza);
 void Carica_Multipli(int* v, int* lunghezza, int* x);
+
+void Carica_Vettore_Char(char* v, int* lunghezza, int min, int max);
+void Stampa_Vettore_Char(char* v);
+void Gnome_Sort(char* v, int* lunghezza);
 
 int main(void) 
 {
@@ -25,7 +29,6 @@ int main(void)
         system("@cls||clear"); //Pulisce la console
         fflush(stdin);
         Visualizza_Menu(scelta);
-        getchar();
     }while(*scelta != 0);
     free(scelta);
 
@@ -66,6 +69,7 @@ void Visualizza_Menu(int* scelta) {
         
         default:
             printf("Input non valido!\n");
+            getchar();
             break;
     }
 }
@@ -89,26 +93,27 @@ void Es_1() {
         scanf("%d", x);
     } while (*x < -100 || *x > 100);
 
-    Carica_Vettore(v, lunghezza, -100, 100);
-    Stampa_Vettore(v, lunghezza);
+    Carica_Vettore_Int(v, lunghezza, -100, 100);
+    Stampa_Vettore_Int(v, lunghezza);
     Carica_Multipli(v, lunghezza, x);
 
     free(lunghezza);
     free(v);
     free(x);
+    getchar();
 }
 
-void Carica_Vettore(int* v, int* lunghezza, int min, int max) {
+void Carica_Vettore_Int(int* v, int* lunghezza, int min, int max) {
     int* i = (int*) malloc(sizeof(int));
 
     for (*i = 0; *i < *lunghezza; (*i)++)
     {
-        *(v + (*i)) = rand() % ((max - min + 1) + min);
+        *(v + (*i)) = (rand() % (max - min + 1)) + min;
     }
     free(i);
 }
 
-void Stampa_Vettore(int* v, int* lunghezza) {
+void Stampa_Vettore_Int(int* v, int* lunghezza) {
     int* i = (int*) malloc(sizeof(int));
     printf("Stampa vettore:\n");
     for (*i = 0; *i < *lunghezza; (*i)++)
@@ -134,7 +139,7 @@ void Carica_Multipli(int* v, int* lunghezza, int* x) {
     }
 
     v_multipli = (int*) realloc(v_multipli, sizeof(int) * (*cont));
-    Stampa_Vettore(v_multipli, cont);
+    Stampa_Vettore_Int(v_multipli, cont);
 
     free(i);
     free(v_multipli);
@@ -142,7 +147,67 @@ void Carica_Multipli(int* v, int* lunghezza, int* x) {
 }
 
 void Es_2() {
+    char* v;
+    int* lunghezza = (int*) malloc(sizeof(int));
+
+    do
+    {
+        printf("Inserire la lunghezza: ");
+        scanf("%d", lunghezza);
+    } while (*lunghezza <= 0);
     
+    v = (char*) malloc(sizeof(char) * (*lunghezza));
+    Carica_Vettore_Char(v, lunghezza, 'a', 'z');
+    Stampa_Vettore_Char(v);
+
+    Gnome_Sort(v, lunghezza);
+    Stampa_Vettore_Char(v);
+
+    free(v);
+    free(lunghezza);
+    getchar();
+}
+
+void Carica_Vettore_Char(char* v, int* lunghezza, int min, int max) {
+    int* i = (int*) malloc(sizeof(int));
+
+    for (*i = 0; *i < *lunghezza; (*i)++)
+    {
+        *(v + (*i)) = (rand() % (max - min + 1)) + min;
+    }
+    free(i);
+}
+
+void Stampa_Vettore_Char(char* v) {
+    printf("Stampa vettore:\n");
+    for (; (*v) != '\0'; v++)
+    {
+        printf("%c ", *v);
+    }
+    printf("\n");
+}
+
+void Gnome_Sort(char* v, int* lunghezza) {
+    int* index = (int*) malloc(sizeof(int));
+    *index = 0;
+    char* tmp;
+    while (*index < *lunghezza) {
+        if (*index == 0) {
+            (*index)++;
+        }
+        if (*(v + *index) >= *(v + *index - 1)) {
+            (*index)++;
+        } 
+            else {
+            tmp = (char*) malloc(sizeof(char));
+            *tmp = *(v + *index);
+            *(v + *index) = *(v + *index - 1);
+            *(v + *index - 1) = *tmp;
+            (*index)--;
+            free(tmp);
+        }
+    }
+    free(index);
 }
 
 void Es_3() {

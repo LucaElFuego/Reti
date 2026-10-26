@@ -9,8 +9,8 @@
 //a. Caricare il vettore con valori casuali (1-10)
 //b. Dire se è palindromo
 
-void Carica_Vettore(int *v, int *dim);
-void Stampa_Vettore(int *v, int *dim);
+void Carica_Vettore_Int(int *v, int *dim);
+void Stampa_Vettore_Int(int *v, int *dim);
 int Controlla_Palindromo(int *v, int *dim);
 
 int main(void) 
@@ -26,8 +26,8 @@ int main(void)
     //Allocazione spazio in memoria per array
     pv = (int*) malloc(sizeof(int) * (*dim));
 
-    Carica_Vettore(pv, dim);
-    Stampa_Vettore(pv, dim);
+    Carica_Vettore_Int(pv, dim);
+    Stampa_Vettore_Int(pv, dim);
     if (Controlla_Palindromo(pv, dim) == TRUE) {
         printf("Il vettore è palindromo\n");
     }
@@ -38,14 +38,14 @@ int main(void)
     return 0;
 }
 
-void Carica_Vettore(int *v, int *dim) {
+void Carica_Vettore_Int(int *v, int *dim) {
     int *i = (int*) malloc(sizeof(int));
     for(*i = 0; *i < *dim; (*i)++) {
         *(v + *i) = 1 + rand()%10;
     }
 }
 
-void Stampa_Vettore(int *v, int *dim) {
+void Stampa_Vettore_Int(int *v, int *dim) {
     int *i = (int*) malloc(sizeof(int));
     for(*i = 0; *i < *dim; (*i)++) {
         printf("v[%d]: %d\n", *i, *(v + *i));
