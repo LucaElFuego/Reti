@@ -26,6 +26,7 @@ int main (void) {
     n2 = Crea_Dipendente("Bianchi", 42);
     n3 = Crea_Dipendente("Verdi", 28);
 
+    //Collegamento nodi
     n1->next = n2;
     n2->next = n3;
     head = n1;
@@ -65,17 +66,17 @@ Dipendenti* Crea_Dipendente(char cogn[MAX], int eta) {
 void Stampa_Lista(Dipendenti* head) {
     Dipendenti* lista = head;
 
-    if (head == NULL) {
-        return;
-    }
-    else 
+    if(head == NULL)
+        printf("Lista VUOTA\n");
+    else
     {
-        printf("\nLista Dipendenti\n");
-        while (lista != NULL)
+        printf("\nLista dipendenti\n");
+        printf("Matr.\tCognome\t\tEta'\n");
+        while(lista != NULL)
         {
-            printf();
+            printf("%s\t%s\t\t%d\n", 
+                    lista->matricola, lista->cognome, lista->eta);
             lista = lista->next;
         }
-        
     }
 }
